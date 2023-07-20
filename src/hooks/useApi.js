@@ -31,6 +31,12 @@ export default function useApi() {
         await callBackend('/logout', 'post');
     }
 
+    const register = async (values) => {
+        const resp = await callBackend('/register', 'post', values);
+
+        return resp?.data ?? {};
+    }
+
     const getActivityList = async () => {
         const resp = await callBackend('/activity', 'get');
 
@@ -40,6 +46,7 @@ export default function useApi() {
     return {
         login,
         logout,
+        register,
         getActivityList
     }
 }
