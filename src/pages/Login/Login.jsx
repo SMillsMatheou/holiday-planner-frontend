@@ -36,14 +36,14 @@ export default function Login() {
                                 name="email"
                                 rules={[{ required: true, message: 'Please inpuot your email!' }]}
                             >
-                                <Input placeholder="Username" />
+                                <Input placeholder="Email" />
                             </Form.Item>
 
                             <Form.Item
                                 name="password"
                                 rules={[{ required: true, message: 'Please input your password!' }]}
                             >
-                                <Input.Password placeholder="password" />
+                                <Input.Password placeholder="Password" />
                             </Form.Item>
 
                             {/* <Form.Item
@@ -58,7 +58,7 @@ export default function Login() {
                                 <Button type="primary" htmlType="submit">
                                     Submit
                                 </Button>
-                                <Button type="link">
+                                <Button onClick={() => navigate('/register')} type="link">
                                     Register
                                 </Button>
                             </Form.Item>
