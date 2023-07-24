@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { useApi } from "../../hooks";
-import { Table } from "antd";
+import { Button, Input, Space, Table, Form } from "antd";
+import { EyeOutlined } from '@ant-design/icons';
+import { Link } from "react-router-dom";
 
 export default function ActivityList() {
-    const { getActivityList } = useApi();
+    const { getActivityList, joinActivity } = useApi();
     const [data, setData] = useState([]);
 
     const columns = [
@@ -27,20 +29,47 @@ export default function ActivityList() {
             dataIndex: 'to_date',
             key: 'to_date',
         },
+        {
+            title: 'View',
+            dataIndex: 'id',
+            key: 'id',
+            render: (_, record) => {
+                return <Link to={`${record.id}`}><EyeOutlined /></Link>;
+            }
+        }
     ];
     
+    const fetchData = async () => {
+        const _data = await getActivityList();
+
+        setData(_data.data);
+    }
 
     useEffect(() => {
-        const fetchData = async () => {
-            const _data = await getActivityList();
-            console.log(_data);
-    
-            setData(_data.data);
-        }
         fetchData();
     }, [])
 
+    const handleJoin = async (values) => {
+        await joinActivity(values.code);
+        await fetchData();
+    }
+
     return (
-        <Table dataSource={data} columns={columns} />
+        <>
+            <div>
+                    <Form name="basic" onFinish={handleJoin}>
+                        <Form.Item
+                            name="code"
+                            rules={[{ required: true, message: 'Please input a room code!'}]}
+                        >
+                            <Space.Compact block>
+                                <Input placeholder="Room Code" />
+                                <Button type="primary" htmlType="submit">Join</Button>
+                            </Space.Compact>
+                        </Form.Item>
+                    </Form>
+            </div>
+            <Table dataSource={data} columns={columns} />
+        </>
     )
 }
