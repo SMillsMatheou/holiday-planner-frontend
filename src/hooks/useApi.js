@@ -43,10 +43,17 @@ export default function useApi() {
         return resp?.data ?? {};
     }
 
+    const joinActivity = async (roomCode) => {
+        const resp = await callBackend(`/activity/join/${roomCode}`, 'post');
+
+        return resp?.data ?? {};
+    }
+
     return {
         login,
         logout,
         register,
-        getActivityList
+        getActivityList,
+        joinActivity
     }
 }
