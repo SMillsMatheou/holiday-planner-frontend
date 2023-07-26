@@ -7,7 +7,7 @@ export default function useApi() {
             if(type === 'post') {
                 return await axios.post(endpoint, body);
             } else if (type === 'get') {
-                return await axios.get(endpoint, body);
+                return await axios.get(endpoint, {params: body});
             } else if (type === 'put') {
                 return await axios.put(endpoint, body);
             }
@@ -49,11 +49,25 @@ export default function useApi() {
         return resp?.data ?? {};
     }
 
+    const addActivityDates = async (id, values) => {
+        const resp = await callBackend(`/activity/${id}/add-date`, 'post', values);
+
+        return resp?.data ?? {};
+    }
+
+    const getActivityDates = async (id, values) => {
+        const resp = await callBackend(`/activity/${id}/dates`, 'get', values);
+
+        return resp?.data ?? [];
+    }
+
     return {
         login,
         logout,
         register,
         getActivityList,
-        joinActivity
+        joinActivity,
+        addActivityDates,
+        getActivityDates
     }
 }
