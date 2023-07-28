@@ -1,5 +1,3 @@
 export default function ActivityCreate() {
-    return (
-        <div className="text-2xl">CREATE</div>
-    )
+  return <div className="text-2xl">CREATE</div>;
 }
