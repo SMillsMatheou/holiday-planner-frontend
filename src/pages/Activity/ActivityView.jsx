@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom"
-import ActivityCalendar from "../../components/Calendar/ActivityCalendar";
 import { Col, Row } from "antd";
-import { AddDates } from "../../components";
+import { AddDates, ActivityCalendar, ActivityParticipantList, ActivityDatesList } from "../../components";
 
 export default function ActivityView() {
     const { id } = useParams();
@@ -14,6 +13,14 @@ export default function ActivityView() {
             <Row>
                 <Col>
                     <ActivityCalendar />
+                </Col>
+            </Row>
+            <Row>
+                <Col span={8}>
+                    <ActivityDatesList />
+                </Col>
+                <Col span={2}>
+                    <ActivityParticipantList />
                 </Col>
             </Row>
         </>
