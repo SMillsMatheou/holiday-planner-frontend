@@ -10,6 +10,8 @@ export default function useApi() {
                 return await axios.get(endpoint, {params: body});
             } else if (type === 'put') {
                 return await axios.put(endpoint, body);
+            } else if (type === 'delete') {
+                return await axios.delete(endpoint, {data: body});
             }
         } catch (error) {
             console.log(error);
@@ -61,6 +63,24 @@ export default function useApi() {
         return resp?.data ?? [];
     }
 
+    const getActivityParticipants = async (id) => {
+        const resp = await callBackend(`/activity/${id}/participants`, 'get');
+
+        return resp?.data ?? [];
+    }
+
+    const getUsersActivityDates = async (id) => {
+        const resp = await callBackend(`/activity/${id}/user-dates`, 'get');
+
+        return resp?.data ?? [];
+    }
+
+    const deleteDate = async (id) => {
+        const resp = await callBackend(`/activity-date/${id}`, 'delete');
+
+        return resp?.data ?? [];
+    }
+
     return {
         login,
         logout,
@@ -68,6 +88,9 @@ export default function useApi() {
         getActivityList,
         joinActivity,
         addActivityDates,
-        getActivityDates
+        getActivityDates,
+        getActivityParticipants,
+        getUsersActivityDates,
+        deleteDate
     }
 }
