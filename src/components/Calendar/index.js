@@ -1,1 +1,1 @@
-export { default as ActivityCalendar } from './ActivityCalendar';
+export { default as ActivityCalendar } from "./ActivityCalendar";
