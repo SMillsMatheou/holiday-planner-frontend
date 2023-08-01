@@ -51,7 +51,7 @@ export default function ActivityCalendar() {
 
     dates.forEach((_date) => {
       if (date.isBetween(_date.from_date, _date.to_date, "day", "[]")) {
-        if (_date.type == "available") availableCount++;
+        if (_date.type === "available") availableCount++;
         else if (_date.type === "unavailable") unavailableCount++;
       }
     });
